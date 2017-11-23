@@ -32,8 +32,14 @@ function dealHTML(html) {
             let temp = []
             for (let i = 0; i < element.children.length; ++i) {
                 let cur = element.children[i]
-                if (cur.name == 'td' && cur.children[0].data) {
-                    temp.push("'" + cur.children[0].data + "'")
+                if (cur.name == 'td') {
+
+                    if (!cur.children[0].data){
+                        temp.push("'" + cur.children[0].children[0].data + "'")
+                    } else {
+                        temp.push("'" + cur.children[0].data + "'")
+                    }
+                    
                 }
             }
             dataArr.push(temp)
@@ -52,7 +58,7 @@ function writeFile(file, data){
     for (let i = 0; i < data.length; ++i) {
         str += '[' + data[i] + ']' + ',' + '\n'
     }  
-    
+
     str = headStr + str + footStr
 
     fs.writeFile(file, str,function(err, data){
