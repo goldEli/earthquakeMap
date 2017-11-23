@@ -3,7 +3,8 @@
 
 ## node爬取数据    
 
-1. cheerio
+1. cheerio模块: 服务器处理html,操作和JQuery一样
+2. fs模块: 读写文件
 
 ### 爬取该页面的所有html
 
