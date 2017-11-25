@@ -21,7 +21,8 @@
 
 ## 画地球
 
-**draw earth ing...**
+**draw earth ing**
+**learn three.js ing**
 
 ## 资料
 https://www.cnblogs.com/Aralic/p/4591036.html
