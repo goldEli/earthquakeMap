@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{margin: 0; padding:0}
+        #canvas3D{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+        <div id="canvas3D"></div>
+        <script src="../libs/pulgin/three.min.js"></script>
+        <script>
+            var scene = new THREE.Scene()
+            var dom = document.getElementById('canvas3D')
+            var height = window.innerHeight;
+            var width = window.innerWidth;
+            var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
+
+            dom.style.height = height
+
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize( width, height );
+            dom.appendChild( renderer.domElement );
+
+            var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+            var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+            var cube = new THREE.Mesh( geometry, material );
+            scene.add( cube );
+
+            camera.position.z = 5;
+
+
+            //设置物体
+            // var sphere;
+            // function initObject(){  
+            //     sphere = new THREE.Mesh(
+            //             new THREE.SphereGeometry(20,20),                //width,height,depth
+            //             new THREE.MeshLambertMaterial({color: 0xff0000}) //材质设定
+            //     );
+            //     scene.add(sphere);
+            //     sphere.position.set(0,0,0);
+            // }
+            // initObject()
+
+            var animate = function () {
+
+                requestAnimationFrame( animate );
+
+                cube.rotation.x += 0.1;
+                cube.rotation.y += 0.1;
+
+                renderer.render(scene, camera);
+
+            };
+            // renderer.render(scene, camera);
+            animate();
+        </script>
+</body>
+</html>

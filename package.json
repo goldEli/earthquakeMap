@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2"
+    "cheerio": "^1.0.0-rc.2",
+    "three": "^0.88.0"
   }
 }
