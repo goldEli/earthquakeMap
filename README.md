@@ -21,6 +21,12 @@
 
 ## 画地球
 
+### 学习three.js
+
+边学边翻译了一些英文资料
+
+* https://juejin.im/post/5a1be6abf265da43062a7e23
+
 **draw earth ing**
 
 ## 资料
