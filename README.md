@@ -2,7 +2,7 @@
 
 用3D地球展示地震发生点
 
-## 想要实现的功能
+## 流程
 
 * 从[中国地震台网](http://news.ceic.ac.cn/index.html)爬取数据
 ![](https://raw.githubusercontent.com/goldEli/earthquakeMap/master/img/news.ceic.ac.cn.png)
@@ -120,9 +120,9 @@ let data = [ //震级(M) 发震时刻(UTC+8) 纬度(°) 经度(°) 深度(千米
 ...
 ] 
 
-接下来就可以画地球了：）
-
 ```
+
+接下来就可以画地球了：）
 
 ## 画地球
 
