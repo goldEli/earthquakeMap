@@ -12,14 +12,17 @@
 
 ## 爬取数据    
 
-用node爬去数据，主要用到HTTP、cheerio、fs三个node模块。
+爬数据我们使用NodeJS，主要用到HTTP、cheerio、fs三个node模块。
 
 
 #1. 请求数据
 
-这里哟啊用到HTTP模块，去请求中国地震台网官网，返回一段HTML代码
+这里会用到HTTP模块，去请求中国地震台网官网，之后返回一段HTML代码
 
 ```
+// 目标url
+const pageUrl = "http://news.ceic.ac.cn/index.html"
+
 // 请求url，返回html
 http.get(pageUrl, function(res) {
     let html = '';
@@ -86,6 +89,7 @@ function writeFile(file, data){
 
     str = headStr + str + footStr
 
+    // 将数据写到output.js中
     fs.writeFile(file, str,function(err, data){
         if(err) {
             console.log(file+'写文件操作失败:',err);
