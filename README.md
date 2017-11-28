@@ -4,7 +4,8 @@
 
 ## 想要实现的功能
 
-* 爬取中国地震台网的数据
+* 从中国地震台网爬取数据
+![](https://raw.githubusercontent.com/goldEli/earthquakeMap/master/img/news.ceic.ac.cn.png)
 * 数据展示到3D地球上
 * 部署服务器，实时抓起数据，更新3D地球
 * 分析数据，对数据进行可视化
