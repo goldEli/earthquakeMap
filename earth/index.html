@@ -19,7 +19,7 @@
             //开启Three.js渲染器
             var renderer;//声明全局变量（对象）
             function initThree() {
-                renderer = new THREE.WebGLRenderer();
+                renderer = new THREE.WebGLRenderer({alpha: true});
                 renderer.setSize( window.innerWidth, window.innerHeight );
                 document.body.appendChild( renderer.domElement );
                 // width = document.getElementById('canvas3d').clientWidth;//获取画布「canvas3d」的宽
@@ -48,24 +48,52 @@
             // 初始化物体
             var obj;
             function initObj () {
-
-                var material = new THREE.LineBasicMaterial({ color: 'red' });
-                var geometry = new THREE.Geometry();
-                geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
-                geometry.vertices.push(new THREE.Vector3(0, 10, 0));
-                geometry.vertices.push(new THREE.Vector3(10, 0, 0));
+                var color = new THREE.Color( "#7833aa" );
+                var material = new THREE.MeshLambertMaterial( {color: color.getHex(), wireframe: true} );
+                var geometry = new THREE.SphereGeometry(24, 32, 32 );
+                // geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
+                // geometry.vertices.push(new THREE.Vector3(0, 10, 0));
+                // geometry.vertices.push(new THREE.Vector3(10, 0, 0));
                 // var geometry = new THREE.BoxGeometry( 1, 1, 1 );
                 // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
                 //obj = new THREE.Mesh( geometry, material );
-                obj = new THREE.Line(geometry, material);
+
+                obj = new THREE.Mesh( geometry, material );
                 scene.add( obj );
             }
 
-            var animate = function () {
-				// requestAnimationFrame( animate );
+            var light = function () {
+                // so many lights
+                var light = new THREE.DirectionalLight( 0xffffff, 1 );
+                light.position.set( 0, 1, 0 );
+                scene.add( light );
 
-				// obj.rotation.x += 0.1;
-				// obj.rotation.y += 0.1;
+                var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+                light.position.set( 0, -1, 0 );
+                scene.add( light );
+
+                var light = new THREE.DirectionalLight( 0xffffff, 1 );
+                light.position.set( 1, 0, 0 );
+                scene.add( light );
+
+                var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+                light.position.set( 0, 0, 1 );
+                scene.add( light );
+
+                var light = new THREE.DirectionalLight( 0xffffff, 1 );
+                light.position.set( 0, 0, -1 );
+                scene.add( light );
+
+                var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+                light.position.set( -1, 0, 0 );
+                scene.add( light );
+            }
+
+            var animate = function () {
+				requestAnimationFrame( animate );
+
+				obj.rotation.x += 0.01;
+				obj.rotation.y += 0.01;
 
 				renderer.render(scene, camera);
 			};
@@ -78,6 +106,7 @@
                 initThree()
                 initScene()
                 initCamera()
+                light()
                 initObj()
 
                 // requestAnimationFrame( animate );
