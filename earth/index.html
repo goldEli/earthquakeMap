@@ -21,6 +21,7 @@
 <body>
         <div id="canvas3D"></div>
         <script src="./threex.planets/examples/vendor/three.js/build/three.min.js"></script>
+        <script src="./threex.planets/examples/vendor/three.js/build/OrbitControls.js"></script>
         <script>
 
             //开启Three.js渲染器
@@ -50,11 +51,15 @@
                 camera.position.set(0, 0, 1);
                 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
+                new THREE.OrbitControls( camera, renderer.domElement );
+
             }
 
-            // 初始化物体
-            var obj;
-            function initObj (cb) {
+            
+
+            // 初始化地球
+            var earthMesh;
+            function initEarthMesh (cb) {
 
                 var material  = new THREE.MeshPhongMaterial()
 
@@ -68,38 +73,37 @@
 
                 material.specular  = new THREE.Color('grey')
 
-
                 var geometry = new THREE.SphereGeometry(0.5, 32, 32 );
                 
-                obj = new THREE.Mesh( geometry, material );
-                scene.add( obj );
-                // var geometry = new THREE.SphereGeometry(0.5, 32, 32 );
-                // // THREE.ImageUtils.loadTexture();
-                // var textureLoader = new THREE.TextureLoader();
-                // textureLoader.crossOrigin = '';
-                // textureLoader.load('./threex.planets/images/earthmap1k.jpg', function(texture) {
-                // texture.wrapS = texture.wrapT =   THREE.RepeatWrapping;
-                //     texture.repeat.set( 2, 2 );
-                //     var material = new THREE.MeshLambertMaterial( {map: texture} );
-                //     material.map    = THREE.ImageUtils.loadTexture('./threex.planets/images/earthmap1k.jpg')
-                //     obj = new THREE.Mesh( geometry, material );
-                //     scene.add( obj );
-                    
-                //     cb();
-                // });
+                earthMesh = new THREE.Mesh( geometry, material );
+                scene.add( earthMesh );
+            }
 
-                
+            // 初始化云
+            var cloudMesh;
+            var initCloudMesh = function () {
+                var geometry   = new THREE.SphereGeometry(0.51, 32, 32)
+                var material  = new THREE.MeshPhongMaterial({
+                    map     : new THREE.Texture('./threex.planets/images/earthcloudmaptrans.jpg'),
+                    side        : THREE.DoubleSide,
+                    opacity     : 0.8,
+                    transparent : true,
+                    depthWrite  : false,
+                })
+                var cloudMesh = new THREE.Mesh(geometry, material)
+                earthMesh.add(cloudMesh)
+
             }
 
             var light = function () {
                 // so many lights
                 var light = new THREE.DirectionalLight( 0xffffff, 1 );
                 light.position.set( 0, 1, 0 );
-                scene.add( light );
+                // scene.add( light );
 
                 var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
                 light.position.set( 0, -1, 0 );
-                scene.add( light );
+                // scene.add( light );
 
                 var light = new THREE.DirectionalLight( 0xffffff, 1 );
                 light.position.set( 1, 0, 0 );
@@ -131,12 +135,13 @@
 			
 
 			var init = function () {
-				
+                
                 initThree()
                 initScene()
                 initCamera()
                 light()
-                initObj()
+                initEarthMesh()
+                // initCloudMesh()
                 animate();
 
                 // requestAnimationFrame( animate );
