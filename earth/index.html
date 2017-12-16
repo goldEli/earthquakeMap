@@ -9,7 +9,7 @@
         body{
             margin: 0; 
             padding:0;
-            background: url('./threex.planets/images/galaxy_starfield.png')
+            /* background: url('./threex.planets/images/galaxy_starfield.png') */
         }
         #canvas3D{
             width: 100%;
@@ -80,18 +80,20 @@
             }
 
             // 初始化云
-            var cloudMesh;
-            var initCloudMesh = function () {
-                var geometry   = new THREE.SphereGeometry(0.51, 32, 32)
-                var material  = new THREE.MeshPhongMaterial({
-                    map     : new THREE.Texture('./threex.planets/images/earthcloudmaptrans.jpg'),
-                    side        : THREE.DoubleSide,
-                    opacity     : 0.8,
-                    transparent : true,
-                    depthWrite  : false,
-                })
-                var cloudMesh = new THREE.Mesh(geometry, material)
-                earthMesh.add(cloudMesh)
+            var earthQuakePoint;
+            var initEarthQuakePoint = function () {
+                var geometry = new THREE.SphereGeometry( 0.01, 32, 32);
+                var color = new THREE.Color( "red" );
+                var material = new THREE.MeshLambertMaterial( {color: color.getHex()} );
+                
+                var earthQuakePoint = new THREE.Mesh(geometry, material)
+
+                var degree = Math.PI/180
+
+                earthQuakePoint.position.x = Math.cos(degree * 35.13) * 0.5
+                earthQuakePoint.position.y = Math.sin(degree * 35.13) * 0.5
+                earthQuakePoint.position.z = Math.tan(degree * 21) * (Math.cos(degree * 35.13) * 0.5)
+                scene.add(earthQuakePoint)
 
             }
 
@@ -141,7 +143,7 @@
                 initCamera()
                 light()
                 initEarthMesh()
-                // initCloudMesh()
+                initEarthQuakePoint()
                 animate();
 
                 // requestAnimationFrame( animate );
